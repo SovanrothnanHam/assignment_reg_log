@@ -1,0 +1,27 @@
+services:
+  registration-micro:
+    container_name: registration_microservice
+    build: 
+      context: ./Registration_Microservice
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "6001:5001"
+    environment:
+      PORT: 5001
+      MONGO_URI: "mongodb+srv://sovanrothnan323_db_user:one90one@cluster0.fsqihog.mongodb.net/aupp?retryWrites=true&w=majority&appName=Cluster0"
+      GATEWAY_SECRET: "youthinksthisistheend"
+  login-micro:
+    container_name: login_microservice
+    build: 
+      context: ./Login_Microservice
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "6002:5002"
+    environment:
+      PORT: 5002
+      MONGO_URI: "mongodb+srv://sovanrothnan323_db_user:one90one@cluster0.fsqihog.mongodb.net/aupp?retryWrites=true&w=majority&appName=Cluster0"
+      JWT_SECRET: "Whyyouknowthisistheend"
+      GATEWAY_SECRET: "youthinksthisistheend"
+  
